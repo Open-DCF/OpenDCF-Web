@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenDCF - Democratising Institutional-Grade Financial Modelling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0284c7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .content {
+            padding: 60px 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .mission {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #4b5563;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .mission strong {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature {
+            padding: 30px;
+            background: #f8fafc;
+            border-left: 4px solid #1e40af;
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 50px 40px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .cta-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .email-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .email-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        }
+
+        .footer {
+            background: #1e3a8a;
+            padding: 30px 40px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .footer-link {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 36px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .mission {
+                font-size: 16px;
+            }
+
+            .header,
+            .content,
+            .cta-section {
+                padding: 40px 30px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">OpenDCF</div>
+            <div class="tagline">Democratising Institutional-Grade Financial Modelling</div>
+        </div>
+
+        <div class="content">
+            <h1 class="section-title">A New Era in Financial Modelling</h1>
+            <p class="mission">
+                OpenDCF is an <strong>open-source, free alternative</strong> to Argus Enterprise and Anaplan.
+                Our mission is to democratise institutional-grade financial modelling, making sophisticated 
+                discounted cash flow analysis <strong>reliable, transparent, and community-owned</strong>.
+            </p>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-title">Open Source</div>
+                    <div class="feature-description">
+                        Built by the community, for the community. Full transparency and collaboration 
+                        at every level of development.
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Free Forever</div>
+                    <div class="feature-description">
+                        No licensing fees, no hidden costs. Enterprise-grade tools accessible to 
+                        everyone, from students to professionals.
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Institutional Quality</div>
+                    <div class="feature-description">
+                        Professional-grade financial modelling capabilities that meet the standards 
+                        of the world's leading institutions.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Stay Informed</h2>
+            <p class="cta-text">
+                OpenDCF is currently in development. Get in touch to learn more or to receive 
+                updates on our progress.
+            </p>
+            <a href="mailto:info@opendcf.org?subject=OpenDCF%20Inquiry" class="email-button">Contact Us</a>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">
+                &copy; 2026 OpenDCF. An open-source initiative.<br>
+                Questions? Email us at <a href="mailto:info@opendcf.org" class="footer-link">info@opendcf.org</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
