@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    # Listen for both domains and their www versions
+    server_name opendcf.io www.opendcf.io opendcf.org www.opendcf.org;
+    
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name opendcf.io www.opendcf.io opendcf.org www.opendcf.org;
+
+    ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+
+    root /var/www/opendcf-web;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

@@ -1,0 +1,4 @@
+.env
+inventory.ini
+*.pem
+*.key

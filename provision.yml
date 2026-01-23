@@ -1,0 +1,71 @@
+---
+- name: Provision Google Cloud VM
+  hosts: webserver
+  vars:
+    ansible_user: "{{ lookup('env', 'GCP_USER') }}"
+  #become: yes             # Run as 'sudo' on the Google VM
+  
+  vars:
+    # Load secrets from your local DevOps environment
+    cf_token: "{{ lookup('env', 'CF_API_TOKEN') }}"
+    cf_zone: "{{ lookup('env', 'CF_ZONE_ID') }}"
+    # We'll use opendcf.io as the primary example
+    cf_record: "{{ lookup('env', 'CF_RECORD_ID_IO') }}"
+    domain_name: "opendcf.io"
+
+  tasks:
+    - name: 1. Install Software
+      apt:
+        pkg: [nginx, git, ufw, ssl-cert]
+        update_cache: yes
+
+    - name: 2. Set up Firewall (UFW)
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop: ['22', '80', '443']
+
+    - name: 3. Enable Firewall
+      ufw:
+        state: enabled
+
+    - name: 4. Clone Web Files
+      git:
+        repo: "https://github.com/Open-DCF/OpenDCF-Web.git"
+        dest: "/var/www/opendcf-web"
+        force: yes
+
+    - name: 5. Configure Nginx
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/opendcf
+      notify: Restart Nginx
+
+    - name: 6. Enable Site & Remove Default
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+    
+    - name: 7. Link New Site
+      file:
+        src: /etc/nginx/sites-available/opendcf
+        dest: /etc/nginx/sites-enabled/opendcf
+        state: link
+
+    - name: 8. Setup DDNS Script
+      template:
+        src: update-ddns.sh
+        dest: /usr/local/bin/update-ddns
+        mode: '0755'
+
+    - name: 9. Schedule DDNS to run every 5 mins
+      cron:
+        name: "Update Cloudflare IP"
+        minute: "*/5"
+        job: "/usr/local/bin/update-ddns"
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
