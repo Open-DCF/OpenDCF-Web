@@ -1,29 +1,28 @@
 ---
 - name: Provision Google Cloud VM
   hosts: webserver
+  become: yes
   vars:
     ansible_user: "{{ lookup('env', 'GCP_USER') }}"
-  #become: yes             # Run as 'sudo' on the Google VM
-  
-  vars:
-    # Load secrets from your local DevOps environment
     cf_token: "{{ lookup('env', 'CF_API_TOKEN') }}"
-    cf_zone: "{{ lookup('env', 'CF_ZONE_ID') }}"
-    # We'll use opendcf.io as the primary example
-    cf_record: "{{ lookup('env', 'CF_RECORD_ID_IO') }}"
-    domain_name: "opendcf.io"
+    cf_data: "{{ lookup('env', 'CF_RECORDS_DATA') }}"
+    home_ip: "{{ lookup('env', 'MY_HOME_IP') }}"
 
   tasks:
     - name: 1. Install Software
       apt:
-        pkg: [nginx, git, ufw, ssl-cert]
+        pkg: [nginx, git, ufw, ssl-cert, cron, fail2ban, snapd]
         update_cache: yes
 
     - name: 2. Set up Firewall (UFW)
       ufw:
-        rule: allow
-        port: "{{ item }}"
-      loop: ['22', '80', '443']
+            rule: allow
+            port: "{{ item.port }}"
+            from_ip: "{{ item.from }}"
+      loop:
+            - { port: '80', from: 'any' }
+            - { port: '443', from: 'any' }
+            - { port: '22', from: "{{ home_ip }}" } # Locked to your Home IP
 
     - name: 3. Enable Firewall
       ufw:
@@ -63,6 +62,24 @@
         name: "Update Cloudflare IP"
         minute: "*/5"
         job: "/usr/local/bin/update-ddns"
+
+    - name: 10. Create SSL Directory
+      file:
+        path: /etc/nginx/ssl
+        state: directory
+        mode: '0755'
+
+    - name: 11. Copy Cloudflare Origin Certificates
+      copy:
+        src: "/.certificates/{{ item }}"
+        dest: "/etc/nginx/ssl/{{ item }}"
+        mode: '0600'
+      loop:
+        - io-cert.crt
+        - io-cert.key
+        - org-cert.crt
+        - org-cert.key
+      notify: Restart Nginx
 
   handlers:
     - name: Restart Nginx

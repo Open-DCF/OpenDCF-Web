@@ -1,14 +1,27 @@
 #!/bin/bash
-API_TOKEN="{{ cf_token }}"
-ZONE_ID="{{ cf_zone }}"
-# Ansible will turn that string into a space-separated list for bash
-RECORD_IDS="{{ lookup('env', 'CF_RECORD_IDS') | replace(',', ' ') }}"
+# This script runs on the Google VM every 5 minutes
 
+API_TOKEN="{{ cf_token }}"
+RECORDS_DATA="{{ cf_data }}"
+
+# Get the current public IP
 IP=$(curl -s https://ifconfig.me)
 
-for RECORD_ID in $RECORD_IDS; do
-    curl -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
+# Loop through each record string
+for entry in $RECORDS_DATA; do
+    # Split the entry into parts
+    IFS=':' read -r ZONE_ID RECORD_ID DOMAIN_NAME <<< "$entry"
+    
+    echo "Updating $DOMAIN_NAME to $IP..."
+
+    curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
          -H "Authorization: Bearer $API_TOKEN" \
          -H "Content-Type: application/json" \
-         --data "{\"type\":\"A\",\"name\":\"{{ domain_name }}\",\"content\":\"$IP\",\"ttl\":120,\"proxied\":true}"
+         -d "{
+              \"type\": \"A\",
+              \"name\": \"$DOMAIN_NAME\",
+              \"content\": \"$IP\",
+              \"ttl\": 120,
+              \"proxied\": true
+            }"
 done
