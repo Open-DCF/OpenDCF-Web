@@ -71,7 +71,7 @@
 
     - name: 11. Copy Cloudflare Origin Certificates
       copy:
-        src: "/.certificates/{{ item }}"
+        src: ".certificates/{{ item }}"
         dest: "/etc/nginx/ssl/{{ item }}"
         mode: '0600'
       loop:

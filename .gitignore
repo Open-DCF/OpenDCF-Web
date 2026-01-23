@@ -3,4 +3,4 @@ inventory.ini
 *.pem
 *.key
 *.crt
-.certificates
+.certificates/
