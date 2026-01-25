@@ -12,19 +12,18 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background-color: #0A0A0A;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0B1A3E 0%, #0F2557 50%, #1A3B6B 100%);
             color: #FFFFFF;
+            line-height: 1.6;
         }
 
         /* Utility Classes */
-        .brutal-black { background-color: #0A0A0A; }
-        .brutal-white { background-color: #FFFFFF; }
-        .terminal-green { color: #00FF41; }
-        .bg-terminal-green { background-color: #00FF41; }
-        .text-black { color: #0A0A0A; }
+        .bg-dark-blue { background-color: #0B1A3E; }
+        .bg-blue { background-color: #1E3A8A; }
+        .bg-accent { background-color: #3B82F6; }
         .text-white { color: #FFFFFF; }
-        .text-terminal-green { color: #00FF41; }
+        .text-blue-light { color: #60A5FA; }
         .text-gray-300 { color: #D1D5DB; }
         .text-gray-400 { color: #9CA3AF; }
 
@@ -89,7 +88,7 @@
 
         /* Border */
         .border-t-2 { border-top-width: 2px; }
-        .border-brutal-white { border-color: #FFFFFF; }
+        .border-white { border-color: #FFFFFF; }
 
         /* Other */
         .overflow-hidden { overflow: hidden; }
@@ -99,22 +98,56 @@
         .transition-colors { transition-property: color, background-color, border-color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
         .duration-200 { transition-duration: 200ms; }
 
-        .brutal-shadow {
-            box-shadow: 8px 8px 0 0 rgba(0, 255, 65, 1);
+        /* Modern Styling */
+        .card {
+            background: rgba(30, 58, 138, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
 
-        .brutal-shadow-black {
-            box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+        .card:hover {
+            background: rgba(30, 58, 138, 0.6);
+            border-color: rgba(96, 165, 250, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
         }
 
-        .brutal-border {
-            border: 2px solid #FFFFFF;
-            border-radius: 0;
+        .btn-primary {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 48px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
         }
 
-        .brutal-border-green {
-            border: 2px solid #00FF41;
-            border-radius: 0;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         @keyframes ticker-scroll {
@@ -133,9 +166,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(10, 10, 10, 0.98);
+            background: linear-gradient(135deg, rgba(11, 26, 62, 0.98) 0%, rgba(15, 37, 87, 0.98) 100%);
             z-index: 1000;
             overflow-y: auto;
+            backdrop-filter: blur(10px);
         }
 
         .mandate-overlay.active {
@@ -150,15 +184,50 @@
             display: block;
         }
 
-        /* Hover effects */
-        .mandate-card:hover {
-            transform: translateX(8px) translateY(8px);
-            box-shadow: 0 0 0 0 rgba(0, 255, 65, 1);
+        .mandate-card {
+            background: rgba(30, 58, 138, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .brutal-button:hover {
-            transform: translateX(4px) translateY(4px);
-            box-shadow: 4px 4px 0 0 rgba(0, 255, 65, 1);
+        .mandate-card:hover {
+            background: rgba(30, 58, 138, 0.6);
+            border-color: rgba(96, 165, 250, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .ticker-bar {
+            background: rgba(30, 58, 138, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* Responsive Design */
@@ -172,7 +241,7 @@
         }
     </style>
 </head>
-<body class="bg-brutal-black text-brutal-white">
+<body>
     
     <!-- Hero Section -->
     <section class="min-h-screen flex flex-col items-center justify-center px-4 py-16">
@@ -180,9 +249,9 @@
             <!-- Logo and Title -->
             <div class="text-center mb-16">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-wider">
-                    <span class="text-terminal-green">OPEN</span><span class="text-brutal-white">DCF</span>
+                    <span class="text-blue-light">OPEN</span><span class="text-white">DCF</span>
                 </h1>
-                <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white">
                     The Open-Source Standard for Real Estate Finance
                 </h2>
                 <p class="text-xl md:text-2xl text-gray-300">
@@ -191,15 +260,15 @@
             </div>
 
             <!-- Tech Specs Ticker -->
-            <div class="mb-16 overflow-hidden brutal-border brutal-shadow bg-brutal-black">
+            <div class="mb-16 overflow-hidden ticker-bar">
                 <div class="py-4 flex whitespace-nowrap">
                     <div class="ticker-content flex gap-8 px-8">
-                        <span class="text-terminal-green text-lg font-bold">[ ENGINE: RUST ]</span>
-                        <span class="text-brutal-white text-lg font-bold">[ GRANULARITY: DAILY ]</span>
-                        <span class="text-terminal-green text-lg font-bold">[ LICENCE: AGPL-3.0 ]</span>
-                        <span class="text-brutal-white text-lg font-bold">[ ENGINE: RUST ]</span>
-                        <span class="text-terminal-green text-lg font-bold">[ GRANULARITY: DAILY ]</span>
-                        <span class="text-brutal-white text-lg font-bold">[ LICENCE: AGPL-3.0 ]</span>
+                        <span class="text-blue-light text-lg font-bold">ENGINE: RUST</span>
+                        <span class="text-white text-lg font-bold">GRANULARITY: DAILY</span>
+                        <span class="text-blue-light text-lg font-bold">LICENCE: AGPL-3.0</span>
+                        <span class="text-white text-lg font-bold">ENGINE: RUST</span>
+                        <span class="text-blue-light text-lg font-bold">GRANULARITY: DAILY</span>
+                        <span class="text-white text-lg font-bold">LICENCE: AGPL-3.0</span>
                     </div>
                 </div>
             </div>
@@ -208,63 +277,63 @@
             <div class="flex justify-center mb-16">
                 <button 
                     onclick="openMandateSelector()" 
-                    class="brutal-border-green brutal-shadow bg-brutal-black text-terminal-green px-12 py-6 text-2xl md:text-3xl font-bold hover:bg-terminal-green hover:text-brutal-black transition-all duration-200 cursor-pointer"
+                    class="btn-primary text-2xl md:text-3xl"
                 >
-                    [ SELECT YOUR MANDATE ]
+                    Select Your Mandate
                 </button>
             </div>
 
             <!-- Icons Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <!-- Shield Icon -->
-                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                <div class="card p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
-                    <h3 class="text-brutal-black text-xl font-bold">AUDITABLE</h3>
+                    <h3 class="text-white text-xl font-bold">AUDITABLE</h3>
                 </div>
 
                 <!-- Line Chart Icon -->
-                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                <div class="card p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
                         <path d="M3 3v18h18"></path>
                         <path d="m19 9-5 5-4-4-3 3"></path>
                     </svg>
-                    <h3 class="text-brutal-black text-xl font-bold">TRANSPARENT</h3>
+                    <h3 class="text-white text-xl font-bold">TRANSPARENT</h3>
                 </div>
 
                 <!-- Code Icon -->
-                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                <div class="card p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4">
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>
                     </svg>
-                    <h3 class="text-brutal-black text-xl font-bold">OPEN-SOURCE</h3>
+                    <h3 class="text-white text-xl font-bold">OPEN-SOURCE</h3>
                 </div>
             </div>
 
             <!-- Contact Section -->
-            <div class="brutal-border brutal-shadow bg-brutal-white p-8 md:p-12 text-center">
-                <h3 class="text-brutal-black text-2xl md:text-3xl font-bold mb-6">JOIN THE WAITLIST</h3>
+            <div class="card p-8 md:p-12 text-center">
+                <h3 class="text-white text-2xl md:text-3xl font-bold mb-6">Join the Waitlist</h3>
                 <form class="max-w-md mx-auto mb-6" onsubmit="handleWaitlistSubmit(event)">
                     <input 
                         type="email" 
                         id="email-input"
                         placeholder="your.email@example.com" 
                         required
-                        class="w-full brutal-border bg-brutal-white text-brutal-black px-4 py-3 mb-4 font-mono text-lg focus:outline-none focus:border-terminal-green"
+                        class="input-field mb-4"
                     />
                     <button 
                         type="submit" 
-                        class="w-full brutal-border-green bg-terminal-green text-brutal-black px-8 py-3 text-xl font-bold hover:bg-brutal-black hover:text-terminal-green transition-all duration-200"
+                        class="btn-primary w-full text-xl"
                     >
-                        [ SUBMIT ]
+                        Submit
                     </button>
                 </form>
-                <p class="text-brutal-black text-lg mb-2">
+                <p class="text-white text-lg mb-2">
                     <strong>For all enquiries:</strong>
                 </p>
-                <a href="mailto:info@opendcf.org" class="text-brutal-black text-xl font-bold underline hover:text-terminal-green transition-colors">
+                <a href="mailto:info@opendcf.org" class="text-blue-light text-xl font-bold underline hover:text-white transition-colors">
                     info@opendcf.org
                 </a>
             </div>
@@ -275,74 +344,74 @@
     <div id="mandate-overlay" class="mandate-overlay">
         <div class="w-full max-w-6xl mx-auto px-4 py-16">
             <div class="flex justify-between items-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-terminal-green">[ SELECT YOUR MANDATE ]</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-light">Select Your Mandate</h2>
                 <button 
                     onclick="closeMandateSelector()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 text-xl font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary"
                 >
-                    [ CLOSE ]
+                    Close
                 </button>
             </div>
 
             <div class="grid grid-cols-1 gap-6">
                 <!-- Student Mandate -->
                 <div 
-                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    class="mandate-card"
                     onclick="selectMandate('student')"
                 >
-                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE STUDENT ] — The Future Guard</h3>
-                    <p class="text-lg text-brutal-white mb-4">
+                    <h3 class="text-2xl font-bold text-blue-light mb-4">THE STUDENT — The Future Guard</h3>
+                    <p class="text-lg text-white mb-4">
                         Stop paying for proprietary certificates. Master the underlying logic of a £100M DCF for free.
                     </p>
-                    <span class="text-terminal-green font-bold">→ OPEN EDUCATION</span>
+                    <span class="text-blue-light font-bold">→ OPEN EDUCATION</span>
                 </div>
 
                 <!-- Individual Advisor Mandate -->
                 <div 
-                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    class="mandate-card"
                     onclick="selectMandate('advisor')"
                 >
-                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INDIVIDUAL ADVISOR ] — The Rogue Operator</h3>
-                    <p class="text-lg text-brutal-white mb-4">
+                    <h3 class="text-2xl font-bold text-blue-light mb-4">THE INDIVIDUAL ADVISOR — The Rogue Operator</h3>
+                    <p class="text-lg text-white mb-4">
                         Ditch the fragile VBA spreadsheets. Deliver institutional-grade auditability without the £50k overhead.
                     </p>
-                    <span class="text-terminal-green font-bold">→ SOVEREIGN MODELLER</span>
+                    <span class="text-blue-light font-bold">→ SOVEREIGN MODELLER</span>
                 </div>
 
                 <!-- Investor Mandate -->
                 <div 
-                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    class="mandate-card"
                     onclick="selectMandate('investor')"
                 >
-                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INVESTOR ] — The Capital Allocator</h3>
-                    <p class="text-lg text-brutal-white mb-4">
+                    <h3 class="text-2xl font-bold text-blue-light mb-4">THE INVESTOR — The Capital Allocator</h3>
+                    <p class="text-lg text-white mb-4">
                         Don't take the GP's word for it. Stress-test every assumption in-house with a transparent engine.
                     </p>
-                    <span class="text-terminal-green font-bold">→ ALPHA VERIFICATION</span>
+                    <span class="text-blue-light font-bold">→ ALPHA VERIFICATION</span>
                 </div>
 
                 <!-- Institution Mandate -->
                 <div 
-                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    class="mandate-card"
                     onclick="selectMandate('institution')"
                 >
-                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INSTITUTION ] — The Incumbent</h3>
-                    <p class="text-lg text-brutal-white mb-4">
+                    <h3 class="text-2xl font-bold text-blue-light mb-4">THE INSTITUTION — The Incumbent</h3>
+                    <p class="text-lg text-white mb-4">
                         Replace the 'Black Box' with an auditable source of truth. Scale your portfolio modelling in Rust, not Excel.
                     </p>
-                    <span class="text-terminal-green font-bold">→ ENTERPRISE INTEGRITY</span>
+                    <span class="text-blue-light font-bold">→ ENTERPRISE INTEGRITY</span>
                 </div>
 
                 <!-- Fund Manager Mandate -->
                 <div 
-                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    class="mandate-card"
                     onclick="selectMandate('fund-manager')"
                 >
-                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE FUND MANAGER ] — The Portfolio Architect</h3>
-                    <p class="text-lg text-brutal-white mb-4">
+                    <h3 class="text-2xl font-bold text-blue-light mb-4">THE FUND MANAGER — The Portfolio Architect</h3>
+                    <p class="text-lg text-white mb-4">
                         Decompose performance from £1B down to the unit level. Track every amendment from IC to Exit.
                     </p>
-                    <span class="text-terminal-green font-bold">→ LIFECYCLE ATTRIBUTION</span>
+                    <span class="text-blue-light font-bold">→ LIFECYCLE ATTRIBUTION</span>
                 </div>
             </div>
         </div>
@@ -354,18 +423,18 @@
             <div class="max-w-4xl w-full">
                 <button 
                     onclick="backToMandates()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary mb-8"
                 >
-                    ← BACK TO MANDATES
+                    ← Back to Mandates
                 </button>
-                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
-                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">OPEN EDUCATION</h2>
-                    <h3 class="text-2xl font-bold mb-6">For The Student — The Future Guard</h3>
-                    <div class="space-y-4 text-lg leading-relaxed">
+                <div class="card p-12">
+                    <h2 class="text-4xl font-bold mb-6 text-blue-light">Open Education</h2>
+                    <h3 class="text-2xl font-bold mb-6 text-white">For The Student — The Future Guard</h3>
+                    <div class="space-y-4 text-lg leading-relaxed text-gray-300">
                         <p>
                             The traditional route: spend £5,000+ on proprietary certifications that teach you how to operate someone else's black box.
                         </p>
-                        <p class="font-bold">
+                        <p class="font-bold text-white">
                             The OpenDCF route: Master the underlying logic of a £100M discounted cash flow model—for free.
                         </p>
                         <p>
@@ -374,9 +443,9 @@
                         <p>
                             Study the same engine used by professionals. Understand every assumption, every calculation, every cash flow. Build your career on knowledge that cannot be taken away.
                         </p>
-                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
-                            <p class="font-bold text-xl mb-2">LEARN WITH TRANSPARENCY</p>
-                            <p>Open-source documentation • Community support • Real-world case studies</p>
+                        <div class="mt-8 p-6 bg-blue border border-blue-light rounded-lg">
+                            <p class="font-bold text-xl mb-2 text-blue-light">LEARN WITH TRANSPARENCY</p>
+                            <p class="text-white">Open-source documentation • Community support • Real-world case studies</p>
                         </div>
                     </div>
                 </div>
@@ -389,18 +458,18 @@
             <div class="max-w-4xl w-full">
                 <button 
                     onclick="backToMandates()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary mb-8"
                 >
-                    ← BACK TO MANDATES
+                    ← Back to Mandates
                 </button>
-                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
-                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">SOVEREIGN MODELLER</h2>
-                    <h3 class="text-2xl font-bold mb-6">For The Individual Advisor — The Rogue Operator</h3>
-                    <div class="space-y-4 text-lg leading-relaxed">
+                <div class="card p-12">
+                    <h2 class="text-4xl font-bold mb-6 text-blue-light">Sovereign Modeller</h2>
+                    <h3 class="text-2xl font-bold mb-6 text-white">For The Individual Advisor — The Rogue Operator</h3>
+                    <div class="space-y-4 text-lg leading-relaxed text-gray-300">
                         <p>
                             You've built your practice on expertise, not expensive software licences. But those Excel models are becoming increasingly fragile, and clients are demanding institutional-grade auditability.
                         </p>
-                        <p class="font-bold">
+                        <p class="font-bold text-white">
                             The industry wants you to spend £50k on proprietary tools. We're offering you something better: sovereignty.
                         </p>
                         <p>
@@ -409,9 +478,9 @@
                         <p>
                             Run sophisticated sensitivity analyses, stress tests, and scenario modelling. Present your work with confidence, knowing every calculation can be traced, verified, and defended.
                         </p>
-                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
-                            <p class="font-bold text-xl mb-2">INDEPENDENCE WITHOUT COMPROMISE</p>
-                            <p>Institutional quality • No recurring costs • Full control</p>
+                        <div class="mt-8 p-6 bg-blue border border-blue-light rounded-lg">
+                            <p class="font-bold text-xl mb-2 text-blue-light">INDEPENDENCE WITHOUT COMPROMISE</p>
+                            <p class="text-white">Institutional quality • No recurring costs • Full control</p>
                         </div>
                     </div>
                 </div>
@@ -424,18 +493,18 @@
             <div class="max-w-4xl w-full">
                 <button 
                     onclick="backToMandates()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary mb-8"
                 >
-                    ← BACK TO MANDATES
+                    ← Back to Mandates
                 </button>
-                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
-                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">ALPHA VERIFICATION</h2>
-                    <h3 class="text-2xl font-bold mb-6">For The Investor — The Capital Allocator</h3>
-                    <div class="space-y-4 text-lg leading-relaxed">
+                <div class="card p-12">
+                    <h2 class="text-4xl font-bold mb-6 text-blue-light">Alpha Verification</h2>
+                    <h3 class="text-2xl font-bold mb-6 text-white">For The Investor — The Capital Allocator</h3>
+                    <div class="space-y-4 text-lg leading-relaxed text-gray-300">
                         <p>
                             The GP presents you with a beautiful deck and promises of 18% IRR. The model? Locked away. The assumptions? "Proprietary."
                         </p>
-                        <p class="font-bold">
+                        <p class="font-bold text-white">
                             Trust, but verify. With OpenDCF, you can rebuild their model from first principles and stress-test every single assumption.
                         </p>
                         <p>
@@ -444,9 +513,9 @@
                         <p>
                             Make allocation decisions based on transparent, reproducible analysis. When the deal goes south, you'll know exactly why—and more importantly, you'll have seen it coming.
                         </p>
-                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
-                            <p class="font-bold text-xl mb-2">VERIFY EVERYTHING</p>
-                            <p>Independent analysis • Transparent assumptions • Reproducible results</p>
+                        <div class="mt-8 p-6 bg-blue border border-blue-light rounded-lg">
+                            <p class="font-bold text-xl mb-2 text-blue-light">VERIFY EVERYTHING</p>
+                            <p class="text-white">Independent analysis • Transparent assumptions • Reproducible results</p>
                         </div>
                     </div>
                 </div>
@@ -459,18 +528,18 @@
             <div class="max-w-4xl w-full">
                 <button 
                     onclick="backToMandates()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary mb-8"
                 >
-                    ← BACK TO MANDATES
+                    ← Back to Mandates
                 </button>
-                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
-                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">ENTERPRISE INTEGRITY</h2>
-                    <h3 class="text-2xl font-bold mb-6">For The Institution — The Incumbent</h3>
-                    <div class="space-y-4 text-lg leading-relaxed">
+                <div class="card p-12">
+                    <h2 class="text-4xl font-bold mb-6 text-blue-light">Enterprise Integrity</h2>
+                    <h3 class="text-2xl font-bold mb-6 text-white">For The Institution — The Incumbent</h3>
+                    <div class="space-y-4 text-lg leading-relaxed text-gray-300">
                         <p>
                             Your organisation manages £10B+ in real estate assets. Your modelling infrastructure? A patchwork of Excel spreadsheets, legacy systems, and proprietary black boxes.
                         </p>
-                        <p class="font-bold">
+                        <p class="font-bold text-white">
                             Replace the black box with an auditable source of truth. Scale your portfolio modelling in Rust, not Excel.
                         </p>
                         <p>
@@ -479,9 +548,9 @@
                         <p>
                             Meet regulatory requirements with confidence. Pass audits without anxiety. Scale your operations without compromising on rigour. Built on Rust for speed, reliability, and memory safety.
                         </p>
-                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
-                            <p class="font-bold text-xl mb-2">INSTITUTIONAL GRADE, OPEN SOURCE</p>
-                            <p>Audit-ready • Scalable • Standards-compliant</p>
+                        <div class="mt-8 p-6 bg-blue border border-blue-light rounded-lg">
+                            <p class="font-bold text-xl mb-2 text-blue-light">INSTITUTIONAL GRADE, OPEN SOURCE</p>
+                            <p class="text-white">Audit-ready • Scalable • Standards-compliant</p>
                         </div>
                     </div>
                 </div>
@@ -494,18 +563,18 @@
             <div class="max-w-4xl w-full">
                 <button 
                     onclick="backToMandates()" 
-                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                    class="btn-secondary mb-8"
                 >
-                    ← BACK TO MANDATES
+                    ← Back to Mandates
                 </button>
-                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
-                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">LIFECYCLE ATTRIBUTION</h2>
-                    <h3 class="text-2xl font-bold mb-6">For The Fund Manager — The Portfolio Architect</h3>
-                    <div class="space-y-4 text-lg leading-relaxed">
+                <div class="card p-12">
+                    <h2 class="text-4xl font-bold mb-6 text-blue-light">Lifecycle Attribution</h2>
+                    <h3 class="text-2xl font-bold mb-6 text-white">For The Fund Manager — The Portfolio Architect</h3>
+                    <div class="space-y-4 text-lg leading-relaxed text-gray-300">
                         <p>
                             You manage a £1B portfolio across multiple assets, geographies, and vintage years. Your LPs want granular attribution. Your auditors want documentation. Your board wants answers.
                         </p>
-                        <p class="font-bold">
+                        <p class="font-bold text-white">
                             Decompose performance from £1B down to the individual unit level. Track every amendment from Investment Committee to Exit.
                         </p>
                         <p>
@@ -514,9 +583,9 @@
                         <p>
                             Provide your LPs with transparent, auditable reporting. Defend your management decisions with data, not narratives. Demonstrate value creation with forensic precision.
                         </p>
-                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
-                            <p class="font-bold text-xl mb-2">COMPLETE TRANSPARENCY</p>
-                            <p>Daily granularity • Full attribution • Audit trail from IC to exit</p>
+                        <div class="mt-8 p-6 bg-blue border border-blue-light rounded-lg">
+                            <p class="font-bold text-xl mb-2 text-blue-light">COMPLETE TRANSPARENCY</p>
+                            <p class="text-white">Daily granularity • Full attribution • Audit trail from IC to exit</p>
                         </div>
                     </div>
                 </div>
@@ -525,8 +594,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="brutal-border-t border-t-2 border-brutal-white py-8 px-4 text-center">
-        <p class="text-lg mb-4 font-bold">
+    <footer class="border-t-2 border-white py-8 px-4 text-center" style="background: rgba(11, 26, 62, 0.8);">
+        <p class="text-lg mb-4 font-bold text-white">
             Built for surveyors, by surveyors. No more black boxes.
         </p>
         <p class="text-sm text-gray-400">
