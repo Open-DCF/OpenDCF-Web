@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenDCF - Democratising Institutional-Grade Financial Modelling</title>
+    <title>OpenDCF - The Open-Source Standard for Real Estate Finance</title>
     <style>
         * {
             margin: 0;
@@ -12,256 +12,599 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0284c7 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: 'Courier New', monospace;
+            background-color: #0A0A0A;
+            color: #FFFFFF;
         }
 
-        .container {
-            max-width: 900px;
+        /* Utility Classes */
+        .brutal-black { background-color: #0A0A0A; }
+        .brutal-white { background-color: #FFFFFF; }
+        .terminal-green { color: #00FF41; }
+        .bg-terminal-green { background-color: #00FF41; }
+        .text-black { color: #0A0A0A; }
+        .text-white { color: #FFFFFF; }
+        .text-terminal-green { color: #00FF41; }
+        .text-gray-300 { color: #D1D5DB; }
+        .text-gray-400 { color: #9CA3AF; }
+
+        /* Layout */
+        .min-h-screen { min-height: 100vh; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+
+        /* Spacing */
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .px-12 { padding-left: 3rem; padding-right: 3rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .p-12 { padding: 3rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mt-8 { margin-top: 2rem; }
+
+        /* Width */
+        .w-full { width: 100%; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-5xl { max-width: 64rem; }
+        .max-w-6xl { max-width: 72rem; }
+        .max-w-md { max-width: 28rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        /* Text */
+        .text-center { text-align: center; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+        .text-5xl { font-size: 3rem; line-height: 1; }
+        .text-7xl { font-size: 4.5rem; line-height: 1; }
+        .font-bold { font-weight: 700; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .leading-relaxed { line-height: 1.625; }
+        .underline { text-decoration: underline; }
+        .whitespace-nowrap { white-space: nowrap; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+
+        /* Border */
+        .border-t-2 { border-top-width: 2px; }
+        .border-brutal-white { border-color: #FFFFFF; }
+
+        /* Other */
+        .overflow-hidden { overflow: hidden; }
+        .overflow-y-auto { overflow-y: auto; }
+        .cursor-pointer { cursor: pointer; }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-colors { transition-property: color, background-color, border-color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .duration-200 { transition-duration: 200ms; }
+
+        .brutal-shadow {
+            box-shadow: 8px 8px 0 0 rgba(0, 255, 65, 1);
+        }
+
+        .brutal-shadow-black {
+            box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1);
+        }
+
+        .brutal-border {
+            border: 2px solid #FFFFFF;
+            border-radius: 0;
+        }
+
+        .brutal-border-green {
+            border: 2px solid #00FF41;
+            border-radius: 0;
+        }
+
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-content {
+            animation: ticker-scroll 20s linear infinite;
+        }
+
+        .mandate-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            height: 100%;
+            background-color: rgba(10, 10, 10, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            padding: 60px 40px;
-            text-align: center;
-            color: #ffffff;
+        .mandate-overlay.active {
+            display: flex;
         }
 
-        .logo {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
+        .story-section {
+            display: none;
         }
 
-        .tagline {
-            font-size: 18px;
-            font-weight: 300;
-            opacity: 0.95;
-            letter-spacing: 0.5px;
+        .story-section.active {
+            display: block;
         }
 
-        .content {
-            padding: 60px 40px;
+        /* Hover effects */
+        .mandate-card:hover {
+            transform: translateX(8px) translateY(8px);
+            box-shadow: 0 0 0 0 rgba(0, 255, 65, 1);
         }
 
-        .section-title {
-            font-size: 32px;
-            font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 25px;
-            text-align: center;
+        .brutal-button:hover {
+            transform: translateX(4px) translateY(4px);
+            box-shadow: 4px 4px 0 0 rgba(0, 255, 65, 1);
         }
 
-        .mission {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #4b5563;
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 0 20px;
-        }
-
-        .mission strong {
-            color: #1e3a8a;
-            font-weight: 600;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-
-        .feature {
-            padding: 30px;
-            background: #f8fafc;
-            border-left: 4px solid #1e40af;
-            border-radius: 4px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-
-        .feature-description {
-            font-size: 15px;
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        .cta-section {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            padding: 50px 40px;
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .cta-title {
-            font-size: 28px;
-            font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 20px;
-        }
-
-        .cta-text {
-            font-size: 16px;
-            color: #4b5563;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .email-button {
-            display: inline-block;
-            padding: 16px 48px;
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
-            letter-spacing: 0.5px;
-        }
-
-        .email-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-        }
-
-        .footer {
-            background: #1e3a8a;
-            padding: 30px 40px;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        .footer-link {
-            color: #93c5fd;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer-link:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 36px;
-            }
-
-            .tagline {
-                font-size: 16px;
-            }
-
-            .section-title {
-                font-size: 26px;
-            }
-
-            .mission {
-                font-size: 16px;
-            }
-
-            .header,
-            .content,
-            .cta-section {
-                padding: 40px 30px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+            .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+            .md\:text-7xl { font-size: 4.5rem; line-height: 1; }
+            .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:p-12 { padding: 3rem; }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">OpenDCF</div>
-            <div class="tagline">Democratising Institutional-Grade Financial Modelling</div>
+<body class="bg-brutal-black text-brutal-white">
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 py-16">
+        <div class="max-w-5xl w-full">
+            <!-- Logo and Title -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-wider">
+                    <span class="text-terminal-green">OPEN</span><span class="text-brutal-white">DCF</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                    The Open-Source Standard for Real Estate Finance
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-300">
+                    Transparent. Auditable. Unapologetically Institutional.
+                </p>
+            </div>
+
+            <!-- Tech Specs Ticker -->
+            <div class="mb-16 overflow-hidden brutal-border brutal-shadow bg-brutal-black">
+                <div class="py-4 flex whitespace-nowrap">
+                    <div class="ticker-content flex gap-8 px-8">
+                        <span class="text-terminal-green text-lg font-bold">[ ENGINE: RUST ]</span>
+                        <span class="text-brutal-white text-lg font-bold">[ GRANULARITY: DAILY ]</span>
+                        <span class="text-terminal-green text-lg font-bold">[ LICENCE: AGPL-3.0 ]</span>
+                        <span class="text-brutal-white text-lg font-bold">[ ENGINE: RUST ]</span>
+                        <span class="text-terminal-green text-lg font-bold">[ GRANULARITY: DAILY ]</span>
+                        <span class="text-brutal-white text-lg font-bold">[ LICENCE: AGPL-3.0 ]</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main CTA - Select Your Mandate -->
+            <div class="flex justify-center mb-16">
+                <button 
+                    onclick="openMandateSelector()" 
+                    class="brutal-border-green brutal-shadow bg-brutal-black text-terminal-green px-12 py-6 text-2xl md:text-3xl font-bold hover:bg-terminal-green hover:text-brutal-black transition-all duration-200 cursor-pointer"
+                >
+                    [ SELECT YOUR MANDATE ]
+                </button>
+            </div>
+
+            <!-- Icons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Shield Icon -->
+                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <h3 class="text-brutal-black text-xl font-bold">AUDITABLE</h3>
+                </div>
+
+                <!-- Line Chart Icon -->
+                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                        <path d="M3 3v18h18"></path>
+                        <path d="m19 9-5 5-4-4-3 3"></path>
+                    </svg>
+                    <h3 class="text-brutal-black text-xl font-bold">TRANSPARENT</h3>
+                </div>
+
+                <!-- Code Icon -->
+                <div class="brutal-border brutal-shadow-black bg-brutal-white p-8 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" class="mx-auto mb-4">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <h3 class="text-brutal-black text-xl font-bold">OPEN-SOURCE</h3>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="brutal-border brutal-shadow bg-brutal-white p-8 md:p-12 text-center">
+                <h3 class="text-brutal-black text-2xl md:text-3xl font-bold mb-6">JOIN THE WAITLIST</h3>
+                <form class="max-w-md mx-auto mb-6" onsubmit="handleWaitlistSubmit(event)">
+                    <input 
+                        type="email" 
+                        id="email-input"
+                        placeholder="your.email@example.com" 
+                        required
+                        class="w-full brutal-border bg-brutal-white text-brutal-black px-4 py-3 mb-4 font-mono text-lg focus:outline-none focus:border-terminal-green"
+                    />
+                    <button 
+                        type="submit" 
+                        class="w-full brutal-border-green bg-terminal-green text-brutal-black px-8 py-3 text-xl font-bold hover:bg-brutal-black hover:text-terminal-green transition-all duration-200"
+                    >
+                        [ SUBMIT ]
+                    </button>
+                </form>
+                <p class="text-brutal-black text-lg mb-2">
+                    <strong>For all enquiries:</strong>
+                </p>
+                <a href="mailto:info@opendcf.org" class="text-brutal-black text-xl font-bold underline hover:text-terminal-green transition-colors">
+                    info@opendcf.org
+                </a>
+            </div>
         </div>
+    </section>
 
-        <div class="content">
-            <h1 class="section-title">A New Era in Financial Modelling</h1>
-            <p class="mission">
-                OpenDCF is an <strong>open-source, free </strong> DCF tool.
-                Our mission is to democratise institutional-grade financial modelling, making sophisticated 
-                discounted cash flow analysis <strong>reliable, transparent, and community-owned</strong>.
-            </p>
+    <!-- Mandate Selector Overlay -->
+    <div id="mandate-overlay" class="mandate-overlay">
+        <div class="w-full max-w-6xl mx-auto px-4 py-16">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-terminal-green">[ SELECT YOUR MANDATE ]</h2>
+                <button 
+                    onclick="closeMandateSelector()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 text-xl font-bold hover:bg-terminal-green transition-colors"
+                >
+                    [ CLOSE ]
+                </button>
+            </div>
 
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-title">Open Source</div>
-                    <div class="feature-description">
-                        Built by the community, for the community. Full transparency and collaboration 
-                        at every level of development.
-                    </div>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Student Mandate -->
+                <div 
+                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    onclick="selectMandate('student')"
+                >
+                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE STUDENT ] — The Future Guard</h3>
+                    <p class="text-lg text-brutal-white mb-4">
+                        Stop paying for proprietary certificates. Master the underlying logic of a £100M DCF for free.
+                    </p>
+                    <span class="text-terminal-green font-bold">→ OPEN EDUCATION</span>
                 </div>
-                <div class="feature">
-                    <div class="feature-title">Free Forever</div>
-                    <div class="feature-description">
-                        No licensing fees, no hidden costs. Enterprise-grade tools accessible to 
-                        everyone, from students to professionals.
-                    </div>
+
+                <!-- Individual Advisor Mandate -->
+                <div 
+                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    onclick="selectMandate('advisor')"
+                >
+                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INDIVIDUAL ADVISOR ] — The Rogue Operator</h3>
+                    <p class="text-lg text-brutal-white mb-4">
+                        Ditch the fragile VBA spreadsheets. Deliver institutional-grade auditability without the £50k overhead.
+                    </p>
+                    <span class="text-terminal-green font-bold">→ SOVEREIGN MODELLER</span>
                 </div>
-                <div class="feature">
-                    <div class="feature-title">Institutional Quality</div>
-                    <div class="feature-description">
-                        Professional-grade financial modelling capabilities that meet the standards 
-                        of the world's leading institutions.
+
+                <!-- Investor Mandate -->
+                <div 
+                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    onclick="selectMandate('investor')"
+                >
+                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INVESTOR ] — The Capital Allocator</h3>
+                    <p class="text-lg text-brutal-white mb-4">
+                        Don't take the GP's word for it. Stress-test every assumption in-house with a transparent engine.
+                    </p>
+                    <span class="text-terminal-green font-bold">→ ALPHA VERIFICATION</span>
+                </div>
+
+                <!-- Institution Mandate -->
+                <div 
+                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    onclick="selectMandate('institution')"
+                >
+                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE INSTITUTION ] — The Incumbent</h3>
+                    <p class="text-lg text-brutal-white mb-4">
+                        Replace the 'Black Box' with an auditable source of truth. Scale your portfolio modelling in Rust, not Excel.
+                    </p>
+                    <span class="text-terminal-green font-bold">→ ENTERPRISE INTEGRITY</span>
+                </div>
+
+                <!-- Fund Manager Mandate -->
+                <div 
+                    class="mandate-card brutal-border brutal-shadow bg-brutal-black p-8 cursor-pointer transition-all duration-200"
+                    onclick="selectMandate('fund-manager')"
+                >
+                    <h3 class="text-2xl font-bold text-terminal-green mb-4">[ THE FUND MANAGER ] — The Portfolio Architect</h3>
+                    <p class="text-lg text-brutal-white mb-4">
+                        Decompose performance from £1B down to the unit level. Track every amendment from IC to Exit.
+                    </p>
+                    <span class="text-terminal-green font-bold">→ LIFECYCLE ATTRIBUTION</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Sections (Hidden by default, shown when mandate selected) -->
+    <div id="student-story" class="story-section">
+        <div class="min-h-screen flex items-center justify-center px-4 py-16">
+            <div class="max-w-4xl w-full">
+                <button 
+                    onclick="backToMandates()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                >
+                    ← BACK TO MANDATES
+                </button>
+                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
+                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">OPEN EDUCATION</h2>
+                    <h3 class="text-2xl font-bold mb-6">For The Student — The Future Guard</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>
+                            The traditional route: spend £5,000+ on proprietary certifications that teach you how to operate someone else's black box.
+                        </p>
+                        <p class="font-bold">
+                            The OpenDCF route: Master the underlying logic of a £100M discounted cash flow model—for free.
+                        </p>
+                        <p>
+                            Learn real estate finance modelling the way it should be taught: transparent, auditable, and built on first principles. No vendor lock-in. No exam fees. Just pure, institutional-grade methodology.
+                        </p>
+                        <p>
+                            Study the same engine used by professionals. Understand every assumption, every calculation, every cash flow. Build your career on knowledge that cannot be taken away.
+                        </p>
+                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
+                            <p class="font-bold text-xl mb-2">LEARN WITH TRANSPARENCY</p>
+                            <p>Open-source documentation • Community support • Real-world case studies</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="cta-section">
-            <h2 class="cta-title">Stay Informed</h2>
-            <p class="cta-text">
-                OpenDCF is currently in development. Get in touch to learn more or to receive 
-                updates on our progress.
-            </p>
-            <a href="mailto:info@opendcf.org?subject=OpenDCF%20Enquiry" class="email-button">Contact Us</a>
-        </div>
-
-        <div class="footer">
-            <p class="footer-text">
-                &copy; 2026 OpenDCF. An open-source initiative.<br>
-                Questions? Email us at <a href="mailto:info@opendcf.org" class="footer-link">info@opendcf.org</a>
-            </p>
+    <div id="advisor-story" class="story-section">
+        <div class="min-h-screen flex items-center justify-center px-4 py-16">
+            <div class="max-w-4xl w-full">
+                <button 
+                    onclick="backToMandates()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                >
+                    ← BACK TO MANDATES
+                </button>
+                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
+                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">SOVEREIGN MODELLER</h2>
+                    <h3 class="text-2xl font-bold mb-6">For The Individual Advisor — The Rogue Operator</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>
+                            You've built your practice on expertise, not expensive software licences. But those Excel models are becoming increasingly fragile, and clients are demanding institutional-grade auditability.
+                        </p>
+                        <p class="font-bold">
+                            The industry wants you to spend £50k on proprietary tools. We're offering you something better: sovereignty.
+                        </p>
+                        <p>
+                            Deliver transparent, auditable DCF models that stand up to due diligence scrutiny. No subscription fees. No vendor dependencies. No compromises on quality.
+                        </p>
+                        <p>
+                            Run sophisticated sensitivity analyses, stress tests, and scenario modelling. Present your work with confidence, knowing every calculation can be traced, verified, and defended.
+                        </p>
+                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
+                            <p class="font-bold text-xl mb-2">INDEPENDENCE WITHOUT COMPROMISE</p>
+                            <p>Institutional quality • No recurring costs • Full control</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div id="investor-story" class="story-section">
+        <div class="min-h-screen flex items-center justify-center px-4 py-16">
+            <div class="max-w-4xl w-full">
+                <button 
+                    onclick="backToMandates()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                >
+                    ← BACK TO MANDATES
+                </button>
+                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
+                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">ALPHA VERIFICATION</h2>
+                    <h3 class="text-2xl font-bold mb-6">For The Investor — The Capital Allocator</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>
+                            The GP presents you with a beautiful deck and promises of 18% IRR. The model? Locked away. The assumptions? "Proprietary."
+                        </p>
+                        <p class="font-bold">
+                            Trust, but verify. With OpenDCF, you can rebuild their model from first principles and stress-test every single assumption.
+                        </p>
+                        <p>
+                            Don't rely on someone else's Excel black box. Run your own analysis. Test their rental growth assumptions. Challenge their exit cap rates. Model your own downside scenarios.
+                        </p>
+                        <p>
+                            Make allocation decisions based on transparent, reproducible analysis. When the deal goes south, you'll know exactly why—and more importantly, you'll have seen it coming.
+                        </p>
+                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
+                            <p class="font-bold text-xl mb-2">VERIFY EVERYTHING</p>
+                            <p>Independent analysis • Transparent assumptions • Reproducible results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="institution-story" class="story-section">
+        <div class="min-h-screen flex items-center justify-center px-4 py-16">
+            <div class="max-w-4xl w-full">
+                <button 
+                    onclick="backToMandates()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                >
+                    ← BACK TO MANDATES
+                </button>
+                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
+                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">ENTERPRISE INTEGRITY</h2>
+                    <h3 class="text-2xl font-bold mb-6">For The Institution — The Incumbent</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>
+                            Your organisation manages £10B+ in real estate assets. Your modelling infrastructure? A patchwork of Excel spreadsheets, legacy systems, and proprietary black boxes.
+                        </p>
+                        <p class="font-bold">
+                            Replace the black box with an auditable source of truth. Scale your portfolio modelling in Rust, not Excel.
+                        </p>
+                        <p>
+                            OpenDCF provides enterprise-grade performance with complete transparency. Every calculation is traceable. Every assumption is documented. Every result is reproducible.
+                        </p>
+                        <p>
+                            Meet regulatory requirements with confidence. Pass audits without anxiety. Scale your operations without compromising on rigour. Built on Rust for speed, reliability, and memory safety.
+                        </p>
+                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
+                            <p class="font-bold text-xl mb-2">INSTITUTIONAL GRADE, OPEN SOURCE</p>
+                            <p>Audit-ready • Scalable • Standards-compliant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fund-manager-story" class="story-section">
+        <div class="min-h-screen flex items-center justify-center px-4 py-16">
+            <div class="max-w-4xl w-full">
+                <button 
+                    onclick="backToMandates()" 
+                    class="brutal-border brutal-shadow bg-brutal-white text-brutal-black px-6 py-3 mb-8 font-bold hover:bg-terminal-green transition-colors"
+                >
+                    ← BACK TO MANDATES
+                </button>
+                <div class="brutal-border brutal-shadow bg-brutal-white p-12 text-brutal-black">
+                    <h2 class="text-4xl font-bold mb-6 text-terminal-green">LIFECYCLE ATTRIBUTION</h2>
+                    <h3 class="text-2xl font-bold mb-6">For The Fund Manager — The Portfolio Architect</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>
+                            You manage a £1B portfolio across multiple assets, geographies, and vintage years. Your LPs want granular attribution. Your auditors want documentation. Your board wants answers.
+                        </p>
+                        <p class="font-bold">
+                            Decompose performance from £1B down to the individual unit level. Track every amendment from Investment Committee to Exit.
+                        </p>
+                        <p>
+                            OpenDCF's daily granularity means you can pinpoint exactly when and why performance diverged from underwriting. Was it rental growth? Void periods? Refinancing terms? Capex overruns?
+                        </p>
+                        <p>
+                            Provide your LPs with transparent, auditable reporting. Defend your management decisions with data, not narratives. Demonstrate value creation with forensic precision.
+                        </p>
+                        <div class="mt-8 p-6 bg-brutal-black text-terminal-green brutal-border">
+                            <p class="font-bold text-xl mb-2">COMPLETE TRANSPARENCY</p>
+                            <p>Daily granularity • Full attribution • Audit trail from IC to exit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="brutal-border-t border-t-2 border-brutal-white py-8 px-4 text-center">
+        <p class="text-lg mb-4 font-bold">
+            Built for surveyors, by surveyors. No more black boxes.
+        </p>
+        <p class="text-sm text-gray-400">
+            &copy; 2026 OpenDCF. Open-source initiative licensed under AGPL-3.0.
+        </p>
+    </footer>
+
+    <script>
+        // Mandate Selector Functions
+        function openMandateSelector() {
+            document.getElementById('mandate-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMandateSelector() {
+            document.getElementById('mandate-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // Hide all story sections
+            document.querySelectorAll('.story-section').forEach(section => {
+                section.classList.remove('active');
+            });
+        }
+
+        function selectMandate(mandate) {
+            // Hide the overlay
+            document.getElementById('mandate-overlay').classList.remove('active');
+            
+            // Show the corresponding story section
+            const storyId = mandate + '-story';
+            document.getElementById(storyId).classList.add('active');
+            
+            // Scroll to the story
+            document.getElementById(storyId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function backToMandates() {
+            // Hide all story sections
+            document.querySelectorAll('.story-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the mandate selector
+            openMandateSelector();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle waitlist form submission
+        function handleWaitlistSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value;
+            
+            // Open email client with pre-filled subject and body
+            window.location.href = `mailto:info@opendcf.org?subject=Waitlist%20Registration&body=Please%20add%20me%20to%20the%20OpenDCF%20waitlist.%0A%0AEmail%3A%20${encodeURIComponent(email)}`;
+            
+            // Clear the form
+            document.getElementById('email-input').value = '';
+            
+            // Show confirmation
+            alert('Thank you for your interest! Your email client will open to send your waitlist registration.');
+            
+            return false;
+        }
+
+        // Close overlay when clicking outside
+        document.getElementById('mandate-overlay').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeMandateSelector();
+            }
+        });
+
+        // ESC key to close overlay
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMandateSelector();
+            }
+        });
+    </script>
 </body>
 </html>
