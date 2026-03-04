@@ -4,3 +4,9 @@ inventory.ini
 *.key
 *.crt
 .certificates/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
