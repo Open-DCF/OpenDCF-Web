@@ -84,6 +84,20 @@
         background: var(--bg-surface-hover);
     }
 
+    /* ── LOGO ────────────────────────────────────────────────────────── */
+    .logomark {
+        border-radius: 8px;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(96, 165, 250, 0.25);
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--font-mono);
+        font-weight: 300;
+        color: #60A5FA;
+        flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════════════════
+
     /* ── SCROLLBAR ────────────────────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -123,11 +137,7 @@
 
     .nav-logomark {
         width: 30px; height: 30px;
-        border-radius: 8px;
-        background: #7EC8C8;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 14px; font-weight: 700; color: #080C14;
-        flex-shrink: 0;
+        font-size: 20px;
     }
 
     .nav-tag {
@@ -677,10 +687,7 @@
 
     .modal-icon {
         width: 40px; height: 40px;
-        border-radius: 10px;
-        background: #7EC8C8;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 18px; font-weight: 700; color: #080C14;
+        font-size: 20px;
         margin-bottom: 20px;
     }
 
@@ -732,7 +739,7 @@
     <nav class="nav">
         <div class="nav-inner">
             <a class="nav-logo" href="#">
-                <div class="nav-logomark">❯</div>
+                <div class="nav-logomark logomark">∂</div>
                 OpenDCF
                 <span class="nav-tag">v0.1.0-alpha</span>
             </a>
@@ -1061,7 +1068,7 @@
     <div id="github-modal" class="modal-backdrop" onclick="handleModalBackdropClick(event)">
         <div class="modal">
             <button class="modal-close" onclick="closeGithubNotice()" aria-label="Close">×</button>
-            <div class="modal-icon">Σ</div>
+            <div class="modal-icon logomark">∂</div>
             <div class="modal-title">Coming Soon</div>
             <div class="modal-body">
                 <p>We are currently working on the alpha product and will release the repository publicly soon.</p>
